@@ -1,1 +1,1 @@
-# Double-ended-Heap
+# Max Heap and Double-ended-Heap 
