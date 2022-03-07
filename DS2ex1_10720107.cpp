@@ -1,4 +1,4 @@
-//10720107 ³¯¥A¤¤ 
+
 #include<iostream>
 #include<string>
 #include<vector>
@@ -131,20 +131,20 @@ int ClassList::compare( int A, int B ){ // A>B:1  A<B:0  A==B:-1
 
 void ClassList::Maxheapify(vector<int> &hT, int i){
   int size = hT.size();
-  int largest = i; // largest¥Î¨Ó°O¿ı¥]§troot»Pchild, ¤TªÌ¤§¤¤Key³Ì¤jªºnode
-  int l = 2 * i + 1;// ¨ú±oleft child
-  int r = 2 * i + 2;// ¨ú±oright child
+  int largest = i; // largestç”¨ä¾†è¨˜éŒ„åŒ…å«rootèˆ‡child, ä¸‰è€…ä¹‹ä¸­Keyæœ€å¤§çš„node
+  int l = 2 * i + 1;// å–å¾—left child
+  int r = 2 * i + 2;// å–å¾—right child
   if (l < size && compare(hT[l], hT[largest])==1)//hT[l] > hT[largest]
     largest = l;
   if (r < size && compare(hT[r], hT[largest])==1)
     largest = r;
 
-  if (largest != i){ // ¦pªG¥Ø«erootªºKey¤£¬O¤TªÌ¤¤ªº³Ì¤j
+  if (largest != i){ // å¦‚æœç›®å‰rootçš„Keyä¸æ˜¯ä¸‰è€…ä¸­çš„æœ€å¤§
     int temp = hT[i];
     hT[i] = hT[largest];
-    hT[largest] = temp;// ´N½Õ´«root»P¤TªÌ¤¤Key³Ì¤jªºnode¤§¦ì¸m
+    hT[largest] = temp;// å°±èª¿æ›rootèˆ‡ä¸‰è€…ä¸­Keyæœ€å¤§çš„nodeä¹‹ä½ç½®
     
-    Maxheapify(hT, largest);  // ½Õ¾ã·sªºsubtree¦¨Max Heap
+    Maxheapify(hT, largest);  // èª¿æ•´æ–°çš„subtreeæˆMax Heap
   }
 } // heapify Max
 
@@ -231,7 +231,7 @@ string Position(int index) { // start from the third node
 } // Judge
 
 
-//¨C¼h¨â¨â¸`ÂIªº¶¡¶Z¬°2^(¾ğ¼h-2)¡AminÃä¡G¸`ÂI-¶¡¶Z
+//æ¯å±¤å…©å…©ç¯€é»çš„é–“è·ç‚º2^(æ¨¹å±¤-2)ï¼Œminé‚Šï¼šç¯€é»-é–“è·
 int CorrespondingMin(int index) {
   int i=index;
 	int space=1;
@@ -244,7 +244,7 @@ int CorrespondingMin(int index) {
   return i-space;
 } // MinPartner
 
-//maxÃä¡G¸`ÂI+¶¡¶Z
+//maxé‚Šï¼šç¯€é»+é–“è·
 int CorrespondingMax(int index) { // index is the current index(which is L)
   if(index == 2) { //the first one
   	return 2; //return itself because it got nothing left(first one)
