@@ -1,10 +1,8 @@
-
 #include<iostream>
 #include<string>
 #include<vector>
 #include<cstdio>
 #include<cstdlib>
-#include <cmath>
 
 using namespace std ;
 
