@@ -15,6 +15,7 @@ typedef struct CT {
 
 class ClassList {
 	
+	public:
 	vector< CollegeType > collegeSet ; 
 	//vector< int > heapTree;
 	string fileNum ; 
@@ -23,8 +24,6 @@ class ClassList {
 	int r_bottom;
 	int l_bottom;
 	int L;
-	
-	public:
 		
 	ClassList(){
 		fileNum = "" ;
@@ -349,6 +348,145 @@ void Print(){
 
 };//Deap
 
+class MinMaxHeap {
+	
+	vector<dN> minMaxHeap ; // heap
+	int num ; // total number of nodes
+	
+	public:
+		MinMaxHeap() {
+			num = 0 ;
+		} // MinMaxHeap
+		
+		void ListToHeap( vector<CollegeType> collegeSet ) {
+			dN heapNode ;
+			for ( int i = 0 ; i < collegeSet.size() ; i++ ) {
+				// turn CollegeType into HeapNode
+				heapNode.index = i+1 ;
+				heapNode.key = collegeSet[i].numStudent ;
+				//heapNode.college = collegeSet[i] ;
+				Insert( heapNode ) ;
+			} // for
+		} // ListToHeap
+		
+		void Swap( dN& place, dN& parent ) {
+			dN temp = place ;
+			place = parent ;
+			parent = temp ;
+		} // Swap
+		
+		void MinGrandSwap( int place ) {
+			int parent = (place - 1) / 2 ;
+			parent = (parent - 1) / 2 ;
+			while ( parent >= 0 && minMaxHeap[place].key < minMaxHeap[parent].key ) {
+				Swap( minMaxHeap[place], minMaxHeap[parent] ) ;
+				place = parent ;
+				parent = (place - 1) / 2 ;
+				parent = (parent - 1) / 2 ;
+			} // while
+		} // Min
+		
+		void MaxGrandSwap( int place ) {
+			int parent = (place - 1) / 2 ;
+			parent = (parent - 1) / 2 ;
+			while ( parent > 0 && minMaxHeap[place].key > minMaxHeap[parent].key ) {
+				Swap( minMaxHeap[place], minMaxHeap[parent] ) ;
+				place = parent ;
+				parent = (place - 1) / 2 ;
+				parent = (parent - 1) / 2 ;
+			} // while
+		} // Max
+		
+		void Insert( dN heapNode ) {
+			minMaxHeap.push_back( heapNode ) ;
+			int place = num ;
+			int parent = (place - 1) / 2 ;
+			if ( IsMin( num ) ) { // if at min level
+				if ( parent > 0 && minMaxHeap[place].key > minMaxHeap[parent].key ) {
+					// switch place and parent
+					Swap( minMaxHeap[place], minMaxHeap[parent] ) ;
+					// check grandparents
+					place = parent ;
+					// at max level, grandparent is larger
+					MaxGrandSwap( place ) ;
+				} // if
+				else if ( parent > 0 && minMaxHeap[place].key <= minMaxHeap[parent].key ) {
+					MinGrandSwap( place ) ;
+				} // else if
+			} // if
+			else { // if at max level
+				if ( parent >= 0 && minMaxHeap[place].key < minMaxHeap[parent].key ) {
+					// switch place and parent
+					Swap( minMaxHeap[place], minMaxHeap[parent] ) ;
+					// check grandparents
+					place = parent ;
+					MinGrandSwap( place ) ;
+				} // if
+				else if ( parent >= 0 && minMaxHeap[place].key >= minMaxHeap[parent].key ){
+					MaxGrandSwap( place ) ;
+				} // else if
+			} // else
+			num++ ;
+		} // Insert
+		
+		bool IsMin( int number ) { // find if it is at min level
+			bool isMin = true ;
+			while ( number > 0 ) {
+				number = (number - 1) / 2 ;
+				if ( isMin ) {
+					isMin = false ;
+				} // if
+				else {
+					isMin = true ;
+				} // else
+			} // while
+			return isMin ;
+		} // IsMin
+		
+		void Result() {
+			// print root
+			cout << "root: "
+			     << "[" << minMaxHeap[0].index << "] "
+				 << minMaxHeap[0].key << endl ;
+			// print bottom
+			cout << "bottom: "
+			     << "[" << minMaxHeap[num-1].index << "] "
+				 << minMaxHeap[num-1].key << endl ;
+			// print leftmost
+			cout << "leftmost bottom: "
+			     << "[" << minMaxHeap[LeftmostBottomLocation()].index << "] "
+				 << minMaxHeap[LeftmostBottomLocation()].key << endl ;
+		} // Result
+		
+		int LeftmostBottomLocation() {
+				int number = num ;
+				int twoMultiple = 0 ;
+				while ( number / 2 > 0 ) {
+					twoMultiple++ ;
+					number = number / 2 ;
+				} // while
+				int leftmostLocation = 1 ;
+				while ( twoMultiple > 0 ) {
+					leftmostLocation = leftmostLocation * 2 ;
+					twoMultiple-- ;
+				} // while
+				return leftmostLocation - 1 ;
+		} // Leftmost 
+		
+		void Reset() {
+			vector<dN>().swap( minMaxHeap ) ;
+			num = 0 ;
+		} // Reset
+		
+		void Print() {
+			for ( int i = 0 ; i < minMaxHeap.size() ; i++ ) {
+				cout  << " " << minMaxHeap[i].key << endl ;
+			} //for
+			cout << endl ;
+		} // Print()
+    	
+}; // class MinMaxHeap 
+
 void ClassList::MissionTwo(){
   Deap deapTree;
   deapTree.initTree(collegeSet.size());
@@ -366,7 +504,7 @@ int main() {
 	string fileNum;
 	int cmd;
 	
-	cout << "> Welcome!\n> Input the cmd ([0]Quit [1]MaxHeap [2]DEAP):\n> ";
+	cout << "> Welcome!\n> Input the cmd ([0]Quit [1]MaxHeap [2]DEAP [3]MinMaxHeap):\n> ";
 	cin >> cmd;
 	while( cmd != 0 ){
 		
@@ -392,12 +530,26 @@ int main() {
 		  	cout << "> No Such Input File!!\n";
 			} //else
 		}//if
+		else if( cmd==3 ){
+			cout << "> Enter FileNum:\n> ";
+			cin >> fileNum;
+			ClassList inputData;
+			if( inputData.Load( fileNum ) ){
+				MinMaxHeap minMaxHeap ;
+			  minMaxHeap.Reset() ; 
+			  minMaxHeap.ListToHeap( inputData.collegeSet );
+			  minMaxHeap.Result() ;
+		  }//if
+		  else{
+		  	cout << "> No Such Input File!!\n";
+			}//else
+		}//else if
 		else{
 			cout << "No such cmd!\n";
 		}//else
 	
 	
-  	cout << "\n\n> Input the cmd ([0]Quit [1]MaxHeap [2]DEAP):\n> ";
+  	cout << "\n\n> Input the cmd ([0]Quit [1]MaxHeap [2]DEAP [3]MinMaxHeap):\n> ";
 		cin >> cmd; 
 	}//while 
 	
