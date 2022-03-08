@@ -31,7 +31,10 @@ Enter Your command([0] Quit [1] Max Heap [2] DEAP [3] MinMax Heap). After you en
 一筆一筆加入資料，並在每筆資料加入時，都依加入的位置，判斷其是在min還是max層，再依此調整其位置(heapify)使min-max heap符合規則後，再加入下一筆資料。(其中動作都類似上面提到的DEAP)
 
 原本我想直接使用DEAP的程式碼去做更改，實作出MinMax Heap，不過實際做之後發現我的DEAP實在是做得太怪了，最後幾乎算是重寫了整個MinMax Heap(主要問題是發生在我DEAP的index紀錄跟MinMax Heap的不太一樣，因為DEAP的開頭node是不用放東西的)。
+
 ## 圖示：
+![image]
+![image]
 
 ## 提問：任務一和任務二的執行效率如何比較？
 解說：
