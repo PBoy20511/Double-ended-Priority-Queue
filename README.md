@@ -1,3 +1,3 @@
 # Double-ended Priority Queue
-#language: C++
-#Max Heap, Double-ended Heap(DEAP) and Min-Max Heap
+Max Heap, Double-ended Heap(DEAP) and Min-Max Heap.
+language: C++
