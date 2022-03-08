@@ -1,2 +1,2 @@
 # Double-ended Priority Queue
-Max Heap, Double-ended-Heap and Min-Max Heap 
+Max Heap, Double-ended Heap(DEAP) and Min-Max Heap 
