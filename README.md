@@ -39,8 +39,7 @@ Enter Your command([0] Quit [1] Max Heap [2] DEAP [3] MinMax Heap). After you en
 ## 提問：任務一和任務二的執行效率如何比較？
 解說：
 
-(swap次數/總資料筆數)
-
 ![image](https://github.com/PBoy20511/Double-ended-Priority-Queue/blob/main/temp/messageImage_1646709323512.jpg)
+(swap次數/總資料筆數)
 
 任務一比任務二的效率好。我想這是因為任務二的目的是要實現”Double-ended”這項特性，讓未來使用者在取出最小值和最大值時的速度都可以一樣快，才決定犧牲掉一點建立樹的時間(totally worth it)。
