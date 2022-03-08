@@ -33,10 +33,10 @@ Enter Your command([0] Quit [1] Max Heap [2] DEAP [3] MinMax Heap). After you en
 原本我想直接使用DEAP的程式碼去做更改，實作出MinMax Heap，不過實際做之後發現我的DEAP實在是做得太怪了，最後幾乎算是重寫了整個MinMax Heap(主要問題是發生在我DEAP的index紀錄跟MinMax Heap的不太一樣，因為DEAP的開頭node是不用放東西的)。
 
 ## 圖示：
-![image]
-![image]
+![image](https://github.com/PBoy20511/Double-ended-Priority-Queue/blob/main/temp/任務一MaxHeap流程圖.jpg)
+![image](https://github.com/PBoy20511/Double-ended-Priority-Queue/blob/main/temp/任務二DEAP流程圖.jpg)
 
 ## 提問：任務一和任務二的執行效率如何比較？
 解說：
- 
+![image](https://github.com/PBoy20511/Double-ended-Priority-Queue/blob/main/temp/messageImage_1646709323512.jpg)
 任務一比任務二的效率好。我想這是因為任務二的目的是要實現”Double-ended”這項特性，讓未來使用者在取出最小值和最大值時的速度都可以一樣快，才決定犧牲掉一點建立樹的時間(totally worth it)。
